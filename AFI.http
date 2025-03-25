@@ -1,0 +1,6 @@
+@AFI_HostAddress = http://localhost:5032
+
+GET {{AFI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
