@@ -7,6 +7,6 @@
         public string Surname { get; set; }
         public string PolicyReferenceNumber { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        public string Email { get; set; }
+        public string? Email { get; set; }
     }
 }

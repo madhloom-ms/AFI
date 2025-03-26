@@ -8,7 +8,7 @@ namespace AFI.Dtos
         public string Surname { get; set; }
         public string PolicyReferenceNumber { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        public string Email { get; set; }
+        public string? Email { get; set; }
     }
 
     public class CustomerForCreationDtoValidator : AbstractValidator<CustomerForCreationDto>
@@ -35,9 +35,16 @@ namespace AFI.Dtos
 
             // Validate email if supplied (must contain at least 4 alphanumeric chars, then '@', then at least 2 alpha numeric chars, and end with '.com' or '.co.uk' ONLY)
             RuleFor(c => c.Email)
-                .Matches(@"^[a-zA-Z0-9]{4,}@[a-zA-Z0-9]{2,}\.(com|co\.uk)$").When(c => !string.IsNullOrEmpty(c.Email))
+                .Matches(@"^[a-zA-Z0-9]{4,}@[a-zA-Z0-9]{2,}\.(com|co\.uk)$")
+                .When(c => !string.IsNullOrEmpty(c.Email))  // Only validate email if provided
                 .WithMessage("Email must be a valid format (e.g., example@example.com or example@example.co.uk).");
+
+            // Ensure either the DOB or email is provided, but email is optional
+            RuleFor(c => c)
+                .Must(c => c.DateOfBirth.HasValue || !string.IsNullOrEmpty(c.Email))  // At least one must be provided
+                .WithMessage("Either the Date of Birth or the email must be provided.");
         }
+
 
         // Custom validation to check if the policy holder is at least 18 years old
         private bool BeAtLeast18YearsOld(DateTime? dateOfBirth)

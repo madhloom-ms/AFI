@@ -22,7 +22,7 @@ namespace AFI.Data
                 entity.Property(c => c.Surname).IsRequired().HasMaxLength(50);
                 entity.Property(c => c.PolicyReferenceNumber).IsRequired().HasMaxLength(9);
                 entity.Property(c => c.DateOfBirth).IsRequired(false);
-                entity.Property(c => c.Email).HasMaxLength(255);
+                entity.Property(c => c.Email).IsRequired(false).HasMaxLength(255);
             });
         }
     }
