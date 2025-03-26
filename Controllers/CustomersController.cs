@@ -64,7 +64,7 @@ namespace AFI.Controllers
 
         
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        private async Task<IActionResult> GetById(int id)
         {
             var customer = await _unitOfWork.Customers.GetByIdAsync(id);
             if (customer == null)
