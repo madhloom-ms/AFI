@@ -35,7 +35,7 @@ namespace AFI.Dtos
 
             // Validate email if supplied (must contain at least 4 alphanumeric chars, then '@', then at least 2 alpha numeric chars, and end with '.com' or '.co.uk' ONLY)
             RuleFor(c => c.Email)
-                .Matches(@"^[a-zA-Z0-9]{4,}@[a-zA-Z0-9]{2,}\.(com|co\.uk)$")
+                .Matches(@"^[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]{2,}\.(com|co\.uk)$")
                 .When(c => !string.IsNullOrEmpty(c.Email))  // Only validate email if provided
                 .WithMessage("Email must be a valid format (e.g., example@example.com or example@example.co.uk).");
 
