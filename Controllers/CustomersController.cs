@@ -52,7 +52,7 @@ namespace AFI.Controllers
                 await _unitOfWork.SaveAllAsync();
                 await transaction.CommitAsync();
 
-                return Ok(createdCustomer.Id);
+                return CreatedAtAction(nameof(GetById), new { id = createdCustomer.Id }, createdCustomer.Id);
             }
             catch (Exception ex)
             {
@@ -62,9 +62,9 @@ namespace AFI.Controllers
             }
         }
 
-        
+
         [HttpGet("{id}")]
-        private async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(int id)  // Changed 'private' to 'public'
         {
             var customer = await _unitOfWork.Customers.GetByIdAsync(id);
             if (customer == null)
