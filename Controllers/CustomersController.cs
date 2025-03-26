@@ -52,7 +52,7 @@ namespace AFI.Controllers
                 await _unitOfWork.SaveAllAsync();
                 await transaction.CommitAsync();
 
-                return CreatedAtAction(nameof(GetById), new { id = createdCustomer.Id }, createdCustomer);
+                return Ok(createdCustomer.Id);
             }
             catch (Exception ex)
             {
